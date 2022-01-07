@@ -1,0 +1,14 @@
+com/socailappwithfirebase/MainActivity.java
+ com.socailappwithfirebase.MainActivity
+com/socailappwithfirebase/BuildConfig.java
+ com.socailappwithfirebase.BuildConfig
+com/socailappwithfirebase/MainApplication.java
+ com.socailappwithfirebase.MainApplication
+ com.socailappwithfirebase.MainApplication$1
+com/socailappwithfirebase/ReactNativeFlipper.java
+ com.socailappwithfirebase.ReactNativeFlipper
+ com.socailappwithfirebase.ReactNativeFlipper$1
+ com.socailappwithfirebase.ReactNativeFlipper$2
+ com.socailappwithfirebase.ReactNativeFlipper$2$1
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList
