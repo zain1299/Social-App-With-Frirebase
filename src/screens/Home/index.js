@@ -1,11 +1,19 @@
+import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {FormButton} from '../../components';
+import auth from '@react-native-firebase/auth';
 
 const Home = () => {
+  const logout = () => {
+    auth()
+      .signOut()
+      .then(() => console.log('User signed out!'));
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>WellCome</Text>
-      <FormButton buttonTitle={'Logout'} onPress={() => {}} />
+      <FormButton buttonTitle={'Logout'} onPress={() => logout()} />
     </View>
   );
 };

@@ -8,6 +8,7 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
+import auth from '@react-native-firebase/auth';
 
 import {FormInput, FormButton, SocialButton} from '../../components';
 
@@ -15,7 +16,21 @@ const Login = ({navigation}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  // const {login, googleLogin, fbLogin} = useContext(AuthContext);
+  const login = () => {
+    auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        console.log('User Signin');
+        navigation.navigate('Home');
+      })
+      .catch(error => {
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+
+        console.error(error);
+      });
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -43,10 +58,7 @@ const Login = ({navigation}) => {
         secureTextEntry={true}
       />
 
-      <FormButton
-        buttonTitle="Sign In"
-        // onPress={() => login(email, password)}
-      />
+      <FormButton buttonTitle="Sign In" onPress={() => login()} />
 
       <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
         <Text style={styles.navButtonText}>Forgot Password?</Text>

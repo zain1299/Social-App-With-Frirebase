@@ -1,14 +1,31 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, Platform, StyleSheet} from 'react-native';
+import auth from '@react-native-firebase/auth';
 import {FormInput, FormButton, SocialButton} from '../../components';
-// import {AuthContext} from '../navigation/AuthProvider';
 
 const Signup = ({navigation}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
 
-  //   const {register} = useContext(AuthContext);
+  const onSignUp = () => {
+    auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        console.log('User account created & signed in!');
+      })
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+
+        console.error(error);
+      });
+  };
 
   return (
     <View style={styles.container}>
@@ -40,10 +57,7 @@ const Signup = ({navigation}) => {
         secureTextEntry={true}
       />
 
-      <FormButton
-        buttonTitle="Sign Up"
-        // onPress={() => register(email, password)}
-      />
+      <FormButton buttonTitle="Sign Up" onPress={() => onSignUp()} />
 
       <View style={styles.textPrivate}>
         <Text style={styles.color_textPrivate}>
